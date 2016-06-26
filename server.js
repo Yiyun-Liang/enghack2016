@@ -72,6 +72,7 @@ app.get('/auth/facebook/callback', userController.authFacebookCallback);
 app.post('/auth/google', userController.authGoogle);
 app.get('/auth/google/callback', userController.authGoogleCallback);
 app.get('/courses/:course_id', uwController.getCourseById);
+app.get('/courses/:course_subject/:course_number/exams', uwController.getCourseExamSchedule);
 
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);

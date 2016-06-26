@@ -7,13 +7,28 @@ var uwclient = new uwaterlooApi({
 });
 
 /*
- * GET /courses/:course_id
- */
+* GET /courses/:course_id
+*/
 exports.getCourseById = function (req, res, next) {
   var course_id = req.params.course_id;
   uwclient.get('/courses/{course_id}', {
-   course_id : course_id
- }, function(error, resource) {
-    res.send(resource.data);
-});
+    course_id : course_id
+  }, function(error, response) {
+    res.send(response.data);
+  });
 }
+
+/*
+ * GET /courses/:subject/:number/exams
+ */
+ exports.getCourseExamSchedule = function (req, res, next) {
+   var course_subject = req.params.course_subject;
+   var course_number = req.params.course_number;
+   console.log(course_subject, course_number);
+   uwclient.get('/courses/{course_subject}/{course_number}/examschedule',{
+     course_subject: course_subject,
+     course_number: course_number
+   }, function (error, response) {
+     res.send(response.data);
+   });
+ }
