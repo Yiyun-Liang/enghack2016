@@ -375,10 +375,12 @@ exports.authGoogle = function(req, res) {
     // Step 2. Retrieve user's profile information.
     request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
       if (profile.error) {
+        console.log("================="+profile.error.message+"=======")
         return res.status(500).send({ message: profile.error.message });
       }
       // Step 3a. Link accounts if user is authenticated.
       if (req.isAuthenticated()) {
+
         User.findOne({ google: profile.sub }, function(err, user) {
           if (user) {
             return res.status(409).send({ msg: 'There is already an existing account linked with Google that belongs to you.' });

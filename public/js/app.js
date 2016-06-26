@@ -7,8 +7,7 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     $httpProvider.defaults.headers.patch = {};
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'homeCtrl'
+        templateUrl: 'partials/home.html'
       })
       .when('/contact', {
         templateUrl: 'partials/contact.html',
@@ -47,12 +46,12 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     $authProvider.signupUrl = '/signup';
     $authProvider.facebook({
       url: '/auth/facebook',
-      clientId: '980220002068787',
+      clientId: '203992120001117',
       redirectUri: 'http://localhost:3000/auth/facebook/callback'
     });
     $authProvider.google({
       url: '/auth/google',
-      clientId: '279101933612-6ltalvj0dp3l4h4tk4cg3gc97d5mq3ek.apps.googleusercontent.com',
+      clientId: '62596779896-181kcsm5ak0ivpvhsvbnmh423judf3vi.apps.googleusercontent.com',
       redirectUri: 'http://localhost:3000/auth/google/callback'
     });
 

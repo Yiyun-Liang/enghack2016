@@ -1,32 +1,37 @@
 <div class="container-fluid" ng-controller="homeCtrl">
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <div class="panel">
         <div class="panel-body">
-          <h3>Group Name</h3>
-          <h4>{{currentCourse.subject}} {{currentCourse.catalog_number}}</h4>
+          <h3>Current Course:</h3>
+          <h4>{{courseInfo.subject}} {{courseInfo.catalog_number}}</h4>
 
           <ul ng-repeat="group in groups">
             <li><a href="#">{{ group.name }}</a></li>
           </ul>
-          <a href="#" role="button" class="btn btn-default">Add a group</a>
+          <div class="form-group">
+            <input name="addCourse" id="addCourse" placeholder="Course subject and number" class="form-control" autofocus>
+          </div>
+          <a href="#" role="button" class="btn btn-default">Add a course</a></br></br>
+          <div class="form-group">
+            <input name="joinCourse" id="joinCourse" placeholder="Course subject and number" class="form-control" autofocus>
+          </div>
+          <a href="#" role="button" class="btn btn-default">Join a course</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <div class="panel">
         <div class="panel-body">
           <h3>Group Dashboard</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
+          <p>What is the assignment due date?</p>
           <a href="#" role="button" class="btn btn-default">View details</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <div class="panel">
-        <div class="panel-body">
+        <div class="panel-body" ng-hide="isEmptyCourse">
           <h3>Class Info</h3>
           <h4>{{ courseInfo.title }}</h4>
           <p>

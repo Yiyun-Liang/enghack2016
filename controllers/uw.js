@@ -1,5 +1,6 @@
 //Require uwaterloo api module
 var uwaterlooApi = require('uwaterloo-api');
+var Course = require('../models/Course');
 
 //Instantiate the client
 var uwclient = new uwaterlooApi({
@@ -17,6 +18,34 @@ exports.getCourseById = function (req, res, next) {
     res.send(response.data);
   });
 }
+
+/*
+* POST /course/:course_id
+*/
+exports.coursePost = function (req, res, next) {
+  Course.findOne({ course_id: req.body.course_id }, function(err, course) {
+    if (course) {
+    return res.status(400).send({ msg: 'The course you have entered is already in your list.' });
+    }
+    course = new Course({
+      course_id: req.body.course_id,
+      users: req.body.users
+    });
+    course.save(function(err) {
+      res.send({ course: course });
+    });
+  });
+}
+
+/*
+* DELETE /course/:course_id
+*/
+exports.courseDelete = function(req, res, next) {
+  Course.remove({ _id: req.course_id }, function(err) {
+    res.send({ msg: 'Your course has been removed.' });
+  });
+};
+
 /*
  * GET /courses/:subject/:number
  */
@@ -30,6 +59,39 @@ exports.getCourseById = function (req, res, next) {
      res.send(response.data);
    });
  }
+
+ /*
+ * POST /course/:course_subject/:course_number
+ */
+ exports.courseInfoPost = function (req, res, next) {
+   assert(req.body.course_id, 'course_id cannot be blank');
+   assert(req.body.course_subject, 'course_subject cannot be blank');
+   assert(req.body.course_number, 'course_number cannot be blank');
+
+   Course.findOne({ course_id: req.body.course_id }, function(err, course) {
+     if (course) {
+     return res.status(400).send({ msg: 'The course you have entered is already in your list.' });
+     }
+     course = new Course({
+       course_id: req.body.course_id,
+       course_subject: req.body.course_subject,
+       course_number: req.body.course_number,
+       users: req.body.users
+     });
+     course.save(function(err) {
+       res.send({ course: course });
+     });
+   });
+ }
+
+ /*
+ * DELETE /course/:course_subject/:course_number
+ */
+ exports.courseInfoDelete = function(req, res, next) {
+   Course.remove({ course_id: req.course_id }, function(err) {
+     res.send({ msg: 'Your course has been removed.' });
+   });
+ };
 /*
  * GET /courses/:subject/:number/exams
  */

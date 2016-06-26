@@ -2,36 +2,34 @@
 
 angular.module('MyApp')
   .controller('homeCtrl', function ($scope, $auth, $http) {
-
-    $http.get('courses/013168')
-    .then(
-      function success(response) {
-        $scope.currentCourse = response.data;
-        $http.get('courses/' + $scope.currentCourse.subject + '/' + $scope.currentCourse.catalog_number)
-        .then(
-          function success(response) {
-            // console.log(response.data);
-            $scope.courseInfo = response.data;
-          },
-          function error(response) {
-            console.log(response.message);
-          }
-        )
-        $http.get('courses/' + $scope.currentCourse.subject + '/' + $scope.currentCourse.catalog_number + '/exams').then(
-          function success(response) {
-            $scope.examschedules = response.data.sections;
-            // console.log($scope.examschedules);
-          },
-          function err(response) {
-            console.log(response.message);
-          }
-        );
-      },
-      function err(response) {
-        console.log('Failed');
-      }
-    );
-
+    $scope.isEmptyCourse = true;
+    $scope.courseInfo = {
+      subject: 'Subject',
+      catalog_number: 000
+    }
+    $scope.goToCourse = function (subject, number) {
+      $scope.isEmptyCourse = false;
+      $http.get('courses/' + subject + '/' + number)
+      .then(
+        function success(response) {
+          // console.log(response.data);
+          $scope.courseInfo = response.data;
+        },
+        function error(response) {
+          console.log(response.message);
+        }
+      )
+      $http.get('courses/' + subject + '/' + number + '/exams').then(
+        function success(response) {
+          $scope.examschedules = response.data.sections;
+          // console.log($scope.examschedules);
+        },
+        function err(response) {
+          console.log(response.message);
+        }
+      );
+    }
+    /*
     $scope.groups = [
       {
         id: 1,
@@ -61,5 +59,5 @@ angular.module('MyApp')
         course_id: "121132",
         member_num: "3"
       }
-    ];
+    ];*/
   });

@@ -74,6 +74,11 @@ app.get('/auth/google/callback', userController.authGoogleCallback);
 app.get('/courses/:course_id', uwController.getCourseById);
 app.get('/courses/:course_subject/:course_number', uwController.getCourseInfo);
 app.get('/courses/:course_subject/:course_number/exams', uwController.getCourseExamSchedule);
+app.post('/courses/:course_id', uwController.coursePost);
+app.delete('/courses/:course_id', uwController.courseDelete);
+app.post('/courses/:course_subject/:course_number', uwController.courseInfoPost);
+app.delete('/courses/:course_subject/:course_number', uwController.courseInfoDelete);
+
 
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);
