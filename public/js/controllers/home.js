@@ -1,7 +1,7 @@
 // var uwaterlooapi = require('uwaterloo-api');
 
 angular.module('MyApp')
-  .controller('homeCtrl', function ($scope, $auth, $http) {
+  .controller('homeCtrl', function ($scope, $auth, $http, $rootScope) {
     $scope.isEmptyCourse = true;
     $scope.courseInfo = {
       subject: 'Subject',
@@ -76,7 +76,6 @@ angular.module('MyApp')
       }
     ];*/
 
-    console.log("Hello World");
     $scope.disableTagButton = {'visibility': 'hidden'};
 
     var refresh = function(){
