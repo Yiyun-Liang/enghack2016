@@ -7,9 +7,24 @@ angular.module('MyApp')
       subject: 'Subject',
       catalog_number: 000
     }
+    $scope.addCourse = function (subject, number) {
+      var data = {
+        'course_subject' : subject,
+        'course_number' : number
+      }
+      $http.post('/courses', data)
+      .then(
+        function success(response) {
+          $scope.goToCourse(subject, number)
+        },
+        function error(response) {
+          console.log(response);
+        }
+      )
+    }
     $scope.goToCourse = function (subject, number) {
       $scope.isEmptyCourse = false;
-      $http.get('courses/' + subject + '/' + number)
+      $http.get('/courses' + subject + '/' + number)
       .then(
         function success(response) {
           // console.log(response.data);

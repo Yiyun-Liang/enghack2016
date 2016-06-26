@@ -61,22 +61,27 @@ exports.courseDelete = function(req, res, next) {
  }
 
  /*
- * POST /course/:course_subject/:course_number
+ * POST /course/
  */
  exports.courseInfoPost = function (req, res, next) {
-   assert(req.body.course_id, 'course_id cannot be blank');
-   assert(req.body.course_subject, 'course_subject cannot be blank');
-   assert(req.body.course_number, 'course_number cannot be blank');
+   //assert(req.body.course_id, 'course_id cannot be blank');
 
-   Course.findOne({ course_id: req.body.course_id }, function(err, course) {
+   req.assert(req.body.course_subject, 'course_subject cannot be blank');
+   req.assert(req.body.course_number, 'course_number cannot be blank');
+
+   var course_subject = req.body.course_subject;
+   var course_number = req.body.course_number;
+   
+   Course.findOne({
+     course_subject: req.body.course_subject //&& course_number: req.body.course_number
+   }, function(err, course) {
+
      if (course) {
      return res.status(400).send({ msg: 'The course you have entered is already in your list.' });
      }
      course = new Course({
-       course_id: req.body.course_id,
        course_subject: req.body.course_subject,
-       course_number: req.body.course_number,
-       users: req.body.users
+       course_number: req.body.course_number
      });
      course.save(function(err) {
        res.send({ course: course });

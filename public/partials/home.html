@@ -3,20 +3,43 @@
     <div class="col-sm-3">
       <div class="panel">
         <div class="panel-body">
-          <h3>Current Course:</h3>
-          <h4>{{courseInfo.subject}} {{courseInfo.catalog_number}}</h4>
+          <div class = "col-sm-offset-2">
+            <h3>Current Course:</h3>
+          </div>
+          <div class = "col-sm-offset-4">
+            <h4>{{courseInfo.subject}} {{courseInfo.catalog_number}}</h4>
 
-          <ul ng-repeat="group in groups">
-            <li><a href="#">{{ group.name }}</a></li>
-          </ul>
-          <div class="form-group">
-            <input name="addCourse" id="addCourse" placeholder="Course subject and number" class="form-control" autofocus>
+            <ul ng-repeat="group in groups">
+              <li><a href="#">{{ group.name }}</a></li>
+            </ul>
           </div>
-          <a href="#" role="button" class="btn btn-default">Add a course</a></br></br>
-          <div class="form-group">
-            <input name="joinCourse" id="joinCourse" placeholder="Course subject and number" class="form-control" autofocus>
+          </br>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input ng-model="courseInfo.subject" name="addCourseSubject" id="addCourseSubject" placeholder="Subject" class="form-control" autofocus>
+            </div>
           </div>
-          <a href="#" role="button" class="btn btn-default">Join a course</a>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input ng-model="courseInfo.catalog_number" name="addCourseNumber" id="addCourseNumber" placeholder="Number" class="form-control" autofocus>
+            </div>
+          </div>
+          <div class = "col-sm-offset-4">
+            <a href="#" role="button" class="btn btn-default" ng-click="addCourse(courseInfo.subject, courseInfo.catalog_number)">Add a course</a></br></br>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input name="joinCourseSubject" id="joinCourseSubject" placeholder="Subject" class="form-control" autofocus>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input name="joinCourseNumber" id="joinCourseNumber" placeholder="Number" class="form-control" autofocus>
+            </div>
+          </div>
+          <div class = "col-sm-offset-4">
+            <a href="#" role="button" class="btn btn-default">Join a course</a>
+          </div>
         </div>
       </div>
     </div>

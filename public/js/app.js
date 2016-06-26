@@ -7,7 +7,8 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     $httpProvider.defaults.headers.patch = {};
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'homeCtrl'
       })
       .when('/contact', {
         templateUrl: 'partials/contact.html',
