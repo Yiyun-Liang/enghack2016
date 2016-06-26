@@ -7,6 +7,15 @@ angular.module('MyApp')
     .then(
       function success(response) {
         $scope.currentCourse = response.data;
+        $http.get('courses/' + $scope.currentCourse.subject + '/' + $scope.currentCourse.catalog_number + '/exams').then(
+          function success(response) {
+            $scope.examschedules = response.data.sections;
+            console.log($scope.examschedules);
+          },
+          function err(response) {
+            console.log(response.message);
+          }
+        );
       },
       function err(response) {
         console.log('Failed');
