@@ -69,11 +69,11 @@ exports.courseDelete = function(req, res, next) {
    req.assert(req.body.course_subject, 'course_subject cannot be blank');
    req.assert(req.body.course_number, 'course_number cannot be blank');
 
-   var course_subject = req.body.course_subject;
-   var course_number = req.body.course_number;
-   
+  //  var course_subject = req.body.course_subject;
+  //  var course_number = req.body.course_number;
+
    Course.findOne({
-     course_subject: req.body.course_subject //&& course_number: req.body.course_number
+     'course_subject': req.body.course_subject, 'course_number': req.body.course_number
    }, function(err, course) {
 
      if (course) {
