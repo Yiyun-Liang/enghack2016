@@ -49,6 +49,25 @@
           <h3>Group Dashboard</h3>
           <p>What is the assignment due date?</p>
           <a href="#" role="button" class="btn btn-default">View details</a>
+
+          <div ng-repeat="message in messages track by $index">
+            <div class="">
+              {{message.user}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {{ message.time | date: 'short'}} :
+            </div>
+            <div class="">
+              {{message.mes}}
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h3>Message</h3>
+          <textarea name="name" rows="8" cols="60" ng-model="mesToSend.mes"></textarea>
+        </div>
+        <div class="panel-body">
+          <button type="button" ng-click="sendMessage()" class="btn btn-default">Send</button>
+          <div ng-style="disableTagButton">
+            Input Area Cannot Be Empty
+          </div>
         </div>
       </div>
     </div>

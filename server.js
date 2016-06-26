@@ -11,6 +11,9 @@ var jwt = require('jsonwebtoken');
 var moment = require('moment');
 var request = require('request');
 
+var mongojs = require('mongojs');
+var db = mongojs('test',['test']);
+
 // Load environment variables from .env file
 dotenv.load();
 
@@ -20,9 +23,10 @@ var User = require('./models/User');
 // Controllers
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-var uwController = require('./controllers/uw');
-var app = express();
 
+var uwController = require('./controllers/uw');
+
+var app = express();
 
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
@@ -32,8 +36,9 @@ mongoose.connection.on('error', function() {
 app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/json' }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -59,6 +64,8 @@ app.use(function(req, res, next) {
   }
 });
 
+
+
 app.post('/contact', contactController.contactPost);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
 app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
@@ -76,6 +83,28 @@ app.get('/courses/:course_subject/:course_number', uwController.getCourseInfo);
 app.get('/courses/:course_subject/:course_number/exams', uwController.getCourseExamSchedule);
 app.post('/courses', uwController.courseInfoPost);
 app.delete('/courses/:course_subject/:course_number', uwController.courseInfoDelete);
+
+
+
+// API for home page
+
+app.post('/send', function (req, res) {
+  console.log("I received data!")
+  console.log(req.body);
+  db.test.insert(req.body, function (err, doc){
+    res.json(doc);
+  });
+});
+
+app.get('/getMes', function (req, res){
+  console.log("I received a GET request!");
+  db.test.find(function (err, docs){
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
+// API for home page
 
 
 app.get('*', function(req, res) {
