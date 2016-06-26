@@ -4,7 +4,7 @@
       <div class="panel">
         <div class="panel-body">
           <h3>Group Name</h3>
-          <h4>{{courseName}}</h4>
+          <h4>{{currentCourse.subject}} {{currentCourse.catalog_number}}</h4>
 
           <ul ng-repeat="group in groups">
             <li><a href="#">{{ group.name }}</a></li>

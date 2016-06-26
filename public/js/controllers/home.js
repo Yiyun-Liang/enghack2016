@@ -1,6 +1,18 @@
+// var uwaterlooapi = require('uwaterloo-api');
+
 angular.module('MyApp')
   .controller('homeCtrl', function ($scope, $auth, $http) {
-    $scope.courseName = 'ECE 124';
+
+    $http.get('courses/013168')
+    .then(
+      function success(response) {
+        $scope.currentCourse = response.data;
+      },
+      function err(response) {
+        console.log('Failed');
+      }
+    );
+
     $scope.groups = [
       {
         id: 1,
