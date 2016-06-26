@@ -17,14 +17,26 @@ exports.getCourseById = function (req, res, next) {
     res.send(response.data);
   });
 }
-
+/*
+ * GET /courses/:subject/:number
+ */
+ exports.getCourseInfo = function (req, res, next) {
+   var course_subject = req.params.course_subject;
+   var course_number = req.params.course_number;
+   uwclient.get('/courses/{course_subject}/{course_number}', {
+     course_subject: course_subject,
+     course_number: course_number
+   }, function (error, response) {
+     res.send(response.data);
+   });
+ }
 /*
  * GET /courses/:subject/:number/exams
  */
  exports.getCourseExamSchedule = function (req, res, next) {
    var course_subject = req.params.course_subject;
    var course_number = req.params.course_number;
-   console.log(course_subject, course_number);
+   // console.log(course_subject, course_number);
    uwclient.get('/courses/{course_subject}/{course_number}/examschedule',{
      course_subject: course_subject,
      course_number: course_number
