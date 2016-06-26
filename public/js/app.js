@@ -52,7 +52,8 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     });
     $authProvider.google({
       url: '/auth/google',
-      clientId: '631036554609-v5hm2amv4pvico3asfi97f54sc51ji4o.apps.googleusercontent.com'
+      clientId: '279101933612-6ltalvj0dp3l4h4tk4cg3gc97d5mq3ek.apps.googleusercontent.com',
+      redirectUri: 'http://localhost:3000/auth/google/callback'
     });
 
     function skipIfAuthenticated($location, $auth) {
