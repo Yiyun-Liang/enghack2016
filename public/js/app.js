@@ -1,10 +1,14 @@
 angular.module('MyApp', ['ngRoute', 'satellizer'])
-  .config(function($routeProvider, $locationProvider, $authProvider) {
+  .config(function($routeProvider, $locationProvider, $httpProvider, $authProvider) {
     $locationProvider.html5Mode(true);
-
+    $httpProvider.defaults.headers.common = {};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'homeCtrl'
       })
       .when('/contact', {
         templateUrl: 'partials/contact.html',
