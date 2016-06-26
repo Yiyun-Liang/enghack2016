@@ -7,10 +7,20 @@ angular.module('MyApp')
     .then(
       function success(response) {
         $scope.currentCourse = response.data;
+        $http.get('courses/' + $scope.currentCourse.subject + '/' + $scope.currentCourse.catalog_number)
+        .then(
+          function success(response) {
+            // console.log(response.data);
+            $scope.courseInfo = response.data;
+          },
+          function error(response) {
+            console.log(response.message);
+          }
+        )
         $http.get('courses/' + $scope.currentCourse.subject + '/' + $scope.currentCourse.catalog_number + '/exams').then(
           function success(response) {
             $scope.examschedules = response.data.sections;
-            console.log($scope.examschedules);
+            // console.log($scope.examschedules);
           },
           function err(response) {
             console.log(response.message);

@@ -28,6 +28,10 @@
       <div class="panel">
         <div class="panel-body">
           <h3>Class Info</h3>
+          <h4>{{ courseInfo.title }}</h4>
+          <p>
+            credit: {{ courseInfo.units}}
+          </p>
           <h4>Final Schedules</h4>
           <div ng-repeat="section in examschedules">
             <h5>For section {{section.section}}:</h5>
