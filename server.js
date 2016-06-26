@@ -20,7 +20,7 @@ var User = require('./models/User');
 // Controllers
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-
+var uwController = require('./controllers/uw');
 var app = express();
 
 
@@ -71,6 +71,7 @@ app.post('/auth/facebook', userController.authFacebook);
 app.get('/auth/facebook/callback', userController.authFacebookCallback);
 app.post('/auth/google', userController.authGoogle);
 app.get('/auth/google/callback', userController.authGoogleCallback);
+app.get('/courses/:course_id', uwController.getCourseById);
 
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);
