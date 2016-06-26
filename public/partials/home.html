@@ -46,6 +46,8 @@
     <div class="col-sm-6">
       <div class="panel">
         <div class="panel-body">
+          <div class="alert alert-warning" role="alert" ng-show="!isAuthenticated">Not logged in!</div>
+
           <h3>Group Dashboard</h3>
           <p>What is the assignment due date?</p>
           <div class="panel-body">
@@ -53,7 +55,7 @@
           </div>
 
 
-          <div ng-repeat="message in messages track by $index">
+          <div ng-repeat="message in messages track by $index" ng-hide="!isAuthenticated">
             <div class="">
               {{message.user}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {{ message.time | date: 'short'}} :
             </div>
@@ -62,7 +64,7 @@
             </div>
           </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-hide="!isAuthenticated">
           <h3>Message</h3>
           <textarea name="name" rows="8" cols="60" ng-model="mesToSend.mes"></textarea>
         </div>
