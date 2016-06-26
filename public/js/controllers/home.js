@@ -2,6 +2,11 @@
 
 angular.module('MyApp')
   .controller('homeCtrl', function ($scope, $auth, $http, $rootScope) {
+    // Get auth status
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+
     $scope.isEmptyCourse = true;
     $scope.courseInfo = {
       subject: 'Subject',
@@ -24,7 +29,7 @@ angular.module('MyApp')
     }
     $scope.goToCourse = function (subject, number) {
       $scope.isEmptyCourse = false;
-      $http.get('/courses' + subject + '/' + number)
+      $http.get('/courses/' + subject + '/' + number)
       .then(
         function success(response) {
           // console.log(response.data);

@@ -10,11 +10,13 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     $routeProvider
       .when('/', {
         templateUrl: 'partials/home.html',
-        controller: 'homeCtrl'
+        controller: 'homeCtrl',
+        resolve: { loginRequired: loginRequired }
       })
       .when('/contact', {
         templateUrl: 'partials/contact.html',
-        controller: 'ContactCtrl'
+        controller: 'ContactCtrl',
+        resolve: { loginRequired: loginRequired }
       })
       .when('/login', {
         templateUrl: 'partials/login.html',
