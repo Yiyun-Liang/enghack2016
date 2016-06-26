@@ -1,7 +1,7 @@
 // var uwaterlooapi = require('uwaterloo-api');
 
 angular.module('MyApp')
-  .controller('homeCtrl', function ($scope, $auth, $http) {
+  .controller('homeCtrl', function ($scope, $auth, $http, $rootScope) {
 
     $http.get('courses/013168')
     .then(
@@ -62,4 +62,35 @@ angular.module('MyApp')
         member_num: "3"
       }
     ];
+
+    console.log("Hello World");
+    $scope.disableTagButton = {'visibility': 'hidden'};
+
+    var refresh = function(){
+      $http.get('/getMes').success(function (res) {
+        //console.log("I got requested data!");
+        $scope.messages = res;
+        $scope.mesToSend = "";
+        //console.log($scope.messages);
+      });
+    };
+
+    refresh();
+
+    $scope.sendMessage = function(){
+      var erroMsg = document.getElementById('erroMsg');
+      if($scope.mesToSend == ""){
+        $scope.disableTagButton = {'visibility': 'visible'};
+        return;
+      }
+      $scope.disableTagButton = {'visibility': 'hidden'};
+      var date = new Date();
+      $scope.mesToSend.user = $rootScope.currentUser.name;
+      $scope.mesToSend.time = date;
+      console.log($scope.mesToSend);
+      $http.post('/send', $scope.mesToSend).success(function(res){
+        console.log(res);
+        refresh();
+      });
+    }
   });
