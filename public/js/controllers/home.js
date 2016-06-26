@@ -2,6 +2,11 @@
 
 angular.module('MyApp')
   .controller('homeCtrl', function ($scope, $auth, $http, $rootScope) {
+    // Get auth status
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+    
     $scope.isEmptyCourse = true;
     $scope.courseInfo = {
       subject: 'Subject',
